@@ -1,0 +1,15 @@
+services:
+  pgdatabase:
+    image: postgres:14.5
+    env_file:
+      - docker-compose.env
+    volumes:
+      - "./ny_taxi_postgres_data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - docker-compose.env
+    ports:
+      - "8080:80"
