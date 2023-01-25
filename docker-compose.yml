@@ -4,12 +4,23 @@ services:
     env_file:
       - docker-compose.env
     volumes:
-      - "./ny_taxi_postgres_data:/var/lib/postgresql/data:rw"
+      - ${PWD}/data/ny_taxi_postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      my-net:
+        ipv4_address: 172.30.0.11
+
   pgadmin:
     image: dpage/pgadmin4
+    volumes:
+      - ${PWD}/data_pgadmin:/var/lig/pgadmin
     env_file:
       - docker-compose.env
     ports:
       - "8080:80"
+
+networks:
+  my-net:
+    external: true
+    name: my-net
